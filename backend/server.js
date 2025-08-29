@@ -2,12 +2,16 @@ import express from "express";
 import home from "./src/routes/home.js";
 import router from "./src/routes/home.js";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 const app=express();
+dotenv.config();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));  
 app.use(express.json()); 
+
 const PORT=5000;
-mongoose.connect('mongodb+srv://ava123:Za2W0hQcbGQjwOPo@cluster0.wnmizf3.mongodb.net/').then(()=>{
+const MONGO_URI=process.env.MONGO_URI;
+mongoose.connect(MONGO_URI).then(()=>{
     console.log('mongoose connected')
 })
 app.use('/',router);
