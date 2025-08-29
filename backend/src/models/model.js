@@ -11,6 +11,6 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-const DataUser = mongoose.model("User", userSchema);
+const DataUser = mongoose.model("form", userSchema);
 
 export { DataUser };
