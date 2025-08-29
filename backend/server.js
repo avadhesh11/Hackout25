@@ -7,7 +7,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));  
 app.use(express.json()); 
 const PORT=5000;
-mongoose.connect('mongodb://127.0.0.1:27017/hackout2025').then(()=>{
+mongoose.connect('mongodb+srv://ava123:Za2W0hQcbGQjwOPo@cluster0.wnmizf3.mongodb.net/').then(()=>{
     console.log('mongoose connected')
 })
 app.use('/',router);
