@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   desc: {
     type: String,
     // required: true
-  }
+  },
 });
 
 const DataUser = mongoose.model("User", userSchema);
