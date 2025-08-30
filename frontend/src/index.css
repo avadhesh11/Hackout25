@@ -6,3 +6,5 @@
   width: 100%;
   height: 500px;
 }
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
