@@ -55,13 +55,39 @@
     .form-container button:hover {
       background: #45a049;
     }
+    video { border: 2px solid #333; border-radius: 12px; }
   </style>
 </head>
 <body>
     <form class="form-container" action="/" method="post">
+        
+        <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+          <video id="camera" autoplay playsinline width="100px"></video>
+          <button onclick="toggleInvert" style="width: fit-content;"> <img href="../../frontend/public/flip.png"/ alt="invert"></button>
+        </div>
         <input placeholder="enter name" name="userName" id="userName"/>
         <textarea placeholder="enter Description" name="desc" id="desc" style="resize: none;"></textarea>
         <button>submit</button>
     </form>
+    <script>
+      async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const videoElement = document.getElementById("camera");
+        videoElement.srcObject = stream;
+      } catch (err) {
+        console.error("Camera access denied:", err);
+      }
+    }
+    startCamera();
+     function toggleInvert() {
+    const video = document.getElementById("camera");
+    if (video.style.filter === "invert(1)") {
+      video.style.filter = "none"; 
+    } else {
+      video.style.filter = "invert(1)"; 
+    }
+  }
+    </script>
 </body>
 </html>
