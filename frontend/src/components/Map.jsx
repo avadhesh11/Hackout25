@@ -17,12 +17,13 @@ L.Icon.Default.mergeOptions({
 
 function MapComponent() {
   return (
-    <MapContainer center={[20.5937, 78.9629]} zoom={5} className="leaflet-container">
+    <div>
+      <MapContainer center={[20.5937, 78.9629]} zoom={5} className="leaflet-container">
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
       />
-
+      
       <Marker position={[28.6139, 77.209]}>
         <Popup>New Delhi - Example Hydrogen Plant</Popup>
       </Marker>
@@ -30,6 +31,9 @@ function MapComponent() {
         <Popup>Mumbai - Storage Hub</Popup>
       </Marker>
     </MapContainer>
+    <button>report a incident</button>
+    </div>
+    
   );
 }
 

@@ -2,6 +2,24 @@ import React, { useState } from "react";
 import exifr from "exifr";
 
 export default function Form() {
+  async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const videoElement = document.getElementById("camera");
+        videoElement.srcObject = stream;
+      } catch (err) {
+        console.error("Camera access denied:", err);
+      }
+    }
+    startCamera();
+     function toggleInvert() {
+    const video = document.getElementById("camera");
+    if (video.style.filter === "invert(1)") {
+      video.style.filter = "none"; 
+    } else {
+      video.style.filter = "invert(1)"; 
+    }
+  }
   const [formData, setFormData] = useState({
     place: "",
     incident: "",
@@ -61,7 +79,7 @@ export default function Form() {
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
           Report an Incident
         </h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form action={"/mark"} method="post" className="space-y-4">
           {/* Place */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">Place</label>
@@ -103,24 +121,11 @@ export default function Form() {
               required
             />
           </div>
-
-          {/* Picture Upload (Camera OR Gallery) */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Upload / Take Picture
-            </label>
-            <input
-              type="file"
-              name="picture"
-              accept="image/*"
-              onChange={handleChange}
-              className="w-full border rounded-xl p-2 bg-white"
-              required
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              📷 Choose from gallery or take a new photo.
-            </p>
-          </div>
+          
+          {/* <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+            <video id="camera" style={"video { border: 2px solid #333; border-radius: 12px; }"} autoplay playsinline width="100px"></video>
+            <button onclick={toggleInvert} style="width: fit-content;"> <img href="../../frontend/public/flip.png" alt="invert" /></button>
+          </div> */}
 
           {/* Show extracted location if available */}
           {formData.latitude && formData.longitude && (
